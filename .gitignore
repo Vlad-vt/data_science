@@ -1,0 +1,24 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Data & ML artifacts
+# Data & ML artifacts
+data/
+mlruns/
+*.onnx
+*.pt
+*.pth
+
+# Tools & local environment
+.env
+.ruff_cache/
+.pytest_cache/
+npm-cache/

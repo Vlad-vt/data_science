@@ -1,0 +1,6 @@
+import pandera.pandas as pa
+from pandera.typing import Series
+
+class CustomerSchema(pa.DataFrameModel):
+    #customer_id: ...
+    ...
