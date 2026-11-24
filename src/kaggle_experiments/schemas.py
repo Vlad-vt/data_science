@@ -1,6 +1,4 @@
-import re
 
-import pandas as pd
 import pandera.pandas as pa
 from pandera.typing import Series
 
@@ -20,15 +18,6 @@ class RawAppointmentsSchema(pa.DataFrameModel):
     handcap: Series[int] = pa.Field(alias="Handcap")
     sms_received: Series[int] = pa.Field(alias="SMS_received")
     no_show: Series[str] = pa.Field(alias="No-show")
-
-    @pa.dataframe_parser
-    @classmethod
-    def normalize_columns(cls, df: pd.DataFrame) -> pd.DataFrame:
-        return df.rename(
-            columns = lambda col: re.sub(r"(?<=[a-z0-9])(?=[A-Z])", "_", col)   
-            .replace("-", "_")
-            .lower()
-        )
 
 class Config:
     strict = True
