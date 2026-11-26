@@ -19,5 +19,27 @@ class RawAppointmentsSchema(pa.DataFrameModel):
     sms_received: Series[int] = pa.Field(alias="SMS_received")
     no_show: Series[str] = pa.Field(alias="No-show")
 
-class Config:
-    strict = True
+class CleanAppointmentsSchema(pa.DataFrameModel):
+    patient_id: Series[float] = pa.Field(gt=0)
+    appointment_id: Series[int] = pa.Field(unique=True, gt=0)
+    gender: Series[str] = pa.Field(isin=["M", "F"])
+    appointment_day: Series[pa.Timestamp]
+    age: Series[int] = pa.Field(ge=0, le=120)
+    neighbourhood: Series[str]
+    scholarship: Series[int] = pa.Field(isin=[0, 1])
+    hipertension: Series[int] = pa.Field(isin=[0, 1])
+    diabetes: Series[int] = pa.Field(isin=[0, 1])
+    alcoholism: Series[int] = pa.Field(isin=[0, 1])
+    handcap: Series[int] = pa.Field(isin=[0, 1, 2, 3, 4])
+    sms_received: Series[int] = pa.Field(isin=[0, 1])
+    scheduled_hour: Series[int] = pa.Field(ge=0, le=23)
+    appointment_dow: Series[int] = pa.Field(ge=0, le=6)
+    lead_time_days: Series[int] = pa.Field(ge=0)
+    prev_appointments: Series[int] = pa.Field(ge=0)
+    prev_noshows: Series[int] = pa.Field(ge=0)
+    prev_noshow_rate: Series[float] = pa.Field(ge=0.0, le=1.0)
+    target: Series[int] = pa.Field(isin=[0, 1])
+
+    class Config:
+        strict = True
+        coerce = True
